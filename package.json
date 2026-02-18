@@ -90,6 +90,16 @@
     "defaultEnabled": true,
     "defaultOptions": {
       "markdownLinkResolution": "shortest"
+    },
+    "optionSchema": {
+      "markdownLinkResolution": {
+        "type": "enum",
+        "values": [
+          "shortest",
+          "absolute",
+          "relative"
+        ]
+      }
     }
   }
 }
