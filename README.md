@@ -10,15 +10,22 @@ npx quartz plugin add github:quartz-community/crawl-links
 
 ## Usage
 
-```ts
-// quartz.config.ts
+```yaml title="quartz.config.yaml"
+plugins:
+  - source: github:quartz-community/crawl-links
+    enabled: true
+    options:
+      markdownLinkResolution: shortest
+```
+
+For advanced use cases, you can override in TypeScript:
+
+```ts title="quartz.ts (override)"
 import * as ExternalPlugin from "./.quartz/plugins";
 
-const config: QuartzConfig = {
-  plugins: {
-    transformers: [ExternalPlugin.CrawlLinks()],
-  },
-};
+ExternalPlugin.CrawlLinks({
+  markdownLinkResolution: "shortest",
+});
 ```
 
 ## Configuration
@@ -33,7 +40,7 @@ const config: QuartzConfig = {
 
 ## Documentation
 
-See the [Quartz documentation](https://quartz.jzhao.xyz/) for more information.
+See the [Quartz documentation](https://quartz.jzhao.xyz/plugins/CrawlLinks) for more information.
 
 ## License
 
