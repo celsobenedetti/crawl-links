@@ -111,7 +111,8 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<CrawlLinksOptions>> = (
                   // WHATWG equivalent https://nodejs.dev/en/api/v18/url/#urlresolvefrom-to
                   const url = new URL(dest, "https://base.com/" + stripSlashes(curSlug, true));
                   const canonicalDest = url.pathname;
-                  let [destCanonical, _destAnchor] = splitAnchor(canonicalDest);
+                  const [destCanonicalRaw, _destAnchor] = splitAnchor(canonicalDest);
+                  let destCanonical = destCanonicalRaw;
                   if (destCanonical.endsWith("/")) {
                     destCanonical += "index";
                   }
