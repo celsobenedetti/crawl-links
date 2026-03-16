@@ -44,8 +44,8 @@
   },
   "peerDependencies": {
     "@jackyzha0/quartz": "^4.5.2",
-    "preact": "^10.0.0",
     "is-absolute-url": "^4.0.1",
+    "preact": "^10.0.0",
     "unist-util-visit": "^5.0.0"
   },
   "peerDependenciesMeta": {
