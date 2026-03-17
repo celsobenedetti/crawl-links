@@ -44,9 +44,7 @@
   },
   "peerDependencies": {
     "@jackyzha0/quartz": "^4.5.2",
-    "is-absolute-url": "^4.0.1",
-    "preact": "^10.0.0",
-    "unist-util-visit": "^5.0.0"
+    "preact": "^10.0.0"
   },
   "peerDependenciesMeta": {
     "@jackyzha0/quartz": {
@@ -54,12 +52,6 @@
     },
     "preact": {
       "optional": false
-    },
-    "is-absolute-url": {
-      "optional": true
-    },
-    "unist-util-visit": {
-      "optional": true
     }
   },
   "dependencies": {
@@ -81,6 +73,7 @@
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",
+    "unist-util-visit": "^5.0.0",
     "vfile": "^6.0.3",
     "vitest": "^2.1.9"
   },
