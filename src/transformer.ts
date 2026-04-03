@@ -158,9 +158,3 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<CrawlLinksOptions>> = (
     },
   };
 };
-
-declare module "vfile" {
-  interface DataMap {
-    links: SimpleSlug[];
-  }
-}

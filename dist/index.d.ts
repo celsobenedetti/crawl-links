@@ -1,6 +1,6 @@
 import { QuartzTransformerPlugin } from '@quartz-community/types';
 export { QuartzTransformerPlugin } from '@quartz-community/types';
-import { SimpleSlug, TransformOptions } from '@quartz-community/utils';
+import { TransformOptions } from '@quartz-community/utils';
 
 interface CrawlLinksOptions {
     /** How to resolve Markdown paths */
@@ -12,10 +12,5 @@ interface CrawlLinksOptions {
     externalLinkIcon: boolean;
 }
 declare const CrawlLinks: QuartzTransformerPlugin<Partial<CrawlLinksOptions>>;
-declare module "vfile" {
-    interface DataMap {
-        links: SimpleSlug[];
-    }
-}
 
 export { CrawlLinks, type CrawlLinksOptions };
