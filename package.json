@@ -91,7 +91,8 @@
     "defaultOrder": 60,
     "defaultEnabled": true,
     "defaultOptions": {
-      "markdownLinkResolution": "shortest"
+      "markdownLinkResolution": "shortest",
+      "disableBrokenWikilinks": false
     },
     "optionSchema": {
       "markdownLinkResolution": {
@@ -101,6 +102,10 @@
           "absolute",
           "relative"
         ]
+      },
+      "disableBrokenWikilinks": {
+        "type": "boolean",
+        "description": "When true, internal links whose resolved slug is not in ctx.allSlugs gain a 'broken' CSS class (alongside 'internal') for styling."
       }
     }
   }

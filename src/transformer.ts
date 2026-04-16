@@ -15,6 +15,15 @@ export interface CrawlLinksOptions {
   openLinksInNewTab: boolean;
   lazyLoad: boolean;
   externalLinkIcon: boolean;
+  /**
+   * When `true`, internal links whose resolved slug is not present in
+   * `ctx.allSlugs` gain a `broken` CSS class (alongside `internal`) so
+   * broken links can be styled distinctly. Applies to both wikilinks
+   * (after they've been converted to `<a>` elements by
+   * ObsidianFlavoredMarkdown) and markdown links, since both are
+   * indistinguishable `<a>` nodes at this phase of the pipeline.
+   */
+  disableBrokenWikilinks: boolean;
 }
 
 const defaultOptions: CrawlLinksOptions = {
@@ -23,6 +32,7 @@ const defaultOptions: CrawlLinksOptions = {
   openLinksInNewTab: false,
   lazyLoad: false,
   externalLinkIcon: true,
+  disableBrokenWikilinks: false,
 };
 
 const isAbsoluteUrlWithOptions = isAbsoluteUrl as (
@@ -122,6 +132,11 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<CrawlLinksOptions>> = (
                   const simple = simplifySlug(full);
                   outgoing.add(simple);
                   node.properties["data-slug"] = full;
+
+                  if (opts.disableBrokenWikilinks && !ctx.allSlugs.includes(full)) {
+                    classes.push("broken");
+                    node.properties.className = classes;
+                  }
                 }
 
                 // rewrite link internals if prettylinks is on

@@ -221,7 +221,8 @@ var defaultOptions = {
   prettyLinks: true,
   openLinksInNewTab: false,
   lazyLoad: false,
-  externalLinkIcon: true
+  externalLinkIcon: true,
+  disableBrokenWikilinks: false
 };
 var isAbsoluteUrlWithOptions = isAbsoluteUrl;
 var CrawlLinks = (userOpts) => {
@@ -289,6 +290,10 @@ var CrawlLinks = (userOpts) => {
                   const simple = simplifySlug(full);
                   outgoing.add(simple);
                   node.properties["data-slug"] = full;
+                  if (opts.disableBrokenWikilinks && !ctx.allSlugs.includes(full)) {
+                    classes.push("broken");
+                    node.properties.className = classes;
+                  }
                 }
                 if (opts.prettyLinks && isInternal && node.children.length === 1) {
                   const textChild = node.children[0];
