@@ -245,7 +245,11 @@ var CrawlLinks = (userOpts) => {
                 let dest = node.properties.href;
                 const classes = node.properties.className ?? [];
                 const isExternal = isAbsoluteUrlWithOptions(dest);
-                classes.push(isExternal ? "external" : "internal");
+                if (isExternal) {
+                  classes.push("external", "external-link");
+                } else {
+                  classes.push("internal", "internal-link");
+                }
                 if (isExternal && opts.externalLinkIcon) {
                   node.children.push({
                     type: "element",
