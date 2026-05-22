@@ -471,6 +471,18 @@ var CrawlLinks = (userOpts) => {
                 }
               }
             });
+            const frontmatterLinks = file.data.frontmatterLinks ?? [];
+            for (const fmLink of frontmatterLinks) {
+              const [targetRaw] = splitAnchor(fmLink);
+              if (!targetRaw) continue;
+              const dest = transformLink(fileSlug, targetRaw, transformOptions);
+              const url = new URL(dest, "https://base.com/" + stripSlashes(curSlug, true));
+              const [canonicalRaw] = splitAnchor(url.pathname);
+              let canonical = canonicalRaw;
+              if (canonical.endsWith("/")) canonical += "index";
+              const full = decodeURIComponent(stripSlashes(canonical, true));
+              outgoing.add(simplifySlug(full));
+            }
             file.data.links = [...outgoing];
           };
         }
