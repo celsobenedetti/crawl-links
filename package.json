@@ -91,7 +91,11 @@
     "defaultOrder": 60,
     "defaultEnabled": true,
     "defaultOptions": {
-      "markdownLinkResolution": "shortest",
+      "markdownLinkResolution": "absolute",
+      "prettyLinks": true,
+      "openLinksInNewTab": false,
+      "lazyLoad": false,
+      "externalLinkIcon": true,
       "disableBrokenWikilinks": false
     },
     "optionSchema": {
@@ -103,9 +107,20 @@
           "relative"
         ]
       },
+      "prettyLinks": {
+        "type": "boolean"
+      },
+      "openLinksInNewTab": {
+        "type": "boolean"
+      },
+      "lazyLoad": {
+        "type": "boolean"
+      },
+      "externalLinkIcon": {
+        "type": "boolean"
+      },
       "disableBrokenWikilinks": {
-        "type": "boolean",
-        "description": "When true, internal links whose resolved slug is not in ctx.allSlugs gain a 'broken' CSS class (alongside 'internal') for styling."
+        "type": "boolean"
       }
     }
   }
