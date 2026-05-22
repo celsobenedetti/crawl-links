@@ -170,6 +170,19 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<CrawlLinksOptions>> = (
               }
             });
 
+            const frontmatterLinks = (file.data.frontmatterLinks as string[] | undefined) ?? [];
+            for (const fmLink of frontmatterLinks) {
+              const [targetRaw] = splitAnchor(fmLink);
+              if (!targetRaw) continue;
+              const dest = transformLink(fileSlug, targetRaw, transformOptions);
+              const url = new URL(dest, "https://base.com/" + stripSlashes(curSlug, true));
+              const [canonicalRaw] = splitAnchor(url.pathname);
+              let canonical = canonicalRaw;
+              if (canonical.endsWith("/")) canonical += "index";
+              const full = decodeURIComponent(stripSlashes(canonical, true)) as FullSlug;
+              outgoing.add(simplifySlug(full));
+            }
+
             file.data.links = [...outgoing];
           };
         },
