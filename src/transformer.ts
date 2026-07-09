@@ -168,6 +168,19 @@ export const CrawlLinks: QuartzTransformerPlugin<Partial<CrawlLinksOptions>> = (
                   node.properties.src = dest;
                 }
               }
+
+              // transform <object data="..."> embeds (used by OFM for SVGs)
+              if (
+                node.tagName === "object" &&
+                node.properties &&
+                typeof node.properties.data === "string"
+              ) {
+                if (!isAbsoluteUrlWithOptions(node.properties.data, { httpOnly: false })) {
+                  let dest = node.properties.data as RelativeURL;
+                  dest = node.properties.data = transformLink(fileSlug, dest, transformOptions);
+                  node.properties.data = dest;
+                }
+              }
             });
 
             const frontmatterLinks = (file.data.frontmatterLinks as string[] | undefined) ?? [];

@@ -474,6 +474,13 @@ var CrawlLinks = (userOpts) => {
                   node.properties.src = dest;
                 }
               }
+              if (node.tagName === "object" && node.properties && typeof node.properties.data === "string") {
+                if (!isAbsoluteUrlWithOptions(node.properties.data)) {
+                  let dest = node.properties.data;
+                  dest = node.properties.data = transformLink(fileSlug, dest, transformOptions);
+                  node.properties.data = dest;
+                }
+              }
             });
             const frontmatterLinks = file.data.frontmatterLinks ?? [];
             for (const fmLink of frontmatterLinks) {
